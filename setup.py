@@ -23,7 +23,7 @@ setup(
 	author='Nick Juliano',
 	author_email='nick_juliano@icloud.com',
 	license='GPL',
-	packages=['exohammer', ],
+	packages=['exohammer', 'exohammer.lnprob'],
 	install_requires=['numpy', 'ttvfast', 'emcee', 'astropy'],
 	EXTRA_REQUIRE={
 		"extras": ["pickle", "matplotlib", "easygui"], },
