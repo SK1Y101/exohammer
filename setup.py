@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as infile:
 	long_description = infile.read()
 
 version = {}
-with open(path.join(here + os.sep + os.pardir, 'ttvfast', 'version.py')) as infile:
+with open(path.join(here, 'exohammer', 'version.py')) as infile:
 	exec(infile.read(), version)
 
 setup(
