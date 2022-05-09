@@ -26,10 +26,10 @@ setup(
 	packages=['exohammer', ],
 	install_requires=['numpy', 'ttvfast', 'emcee', 'astropy'],
 	EXTRA_REQUIRE={
-		"extras": ["pickle", "matplotlib", "easygui"], }
-# "tests": ["pytest", "pytest-cov", "coverage[toml]"],
-ext_modules = [exohammer, ],
-              classifiers = [
+		"extras": ["pickle", "matplotlib", "easygui"], },
+	# "tests": ["pytest", "pytest-cov", "coverage[toml]"],
+	ext_modules = [exohammer, ],
+	classifiers = [
 	'Development Status :: 4 - Beta',
 	'Intended Audience :: Science/Research',
 	'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
