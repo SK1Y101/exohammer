@@ -12,7 +12,10 @@ from . import planetary_system
 from . import mcmc_run
 #from . import prob_functions
 from . import system
-from . import store
+try:
+	from . import store
+except ImportError or ModuleNotFoundError as err:
+	print('Could not import exohammer.store, {}\nstore feature will not be usable.'.format(err))
 
 
 def describe():
@@ -21,14 +24,14 @@ def describe():
             ________________________________________________________
             ____GIVEN____
             ________________________________________________________
-           
+
             TTV_Module.given.given: class
             organizes the given information for the rest of the classes and functions
-            .__init__(self, mstar, 
-                      ttvs,              #[epoch, measured, error, given_ttvs], 
-                      rvs,               #[bjd, mnvel, errvel], 
+            .__init__(self, mstar,
+                      ttvs,              #[epoch, measured, error, given_ttvs],
+                      rvs,               #[bjd, mnvel, errvel],
                       orbital_elements)
-            
+
             RETURNS:
                 #### planetary system data:
                 self.mstar
@@ -37,25 +40,25 @@ def describe():
                 self.nplanets (total number of planets in the system)
                 self.tmin
                 self.tmax
-                
+
                 #### ttv data:
                 self.epoch
                 self.measured
                 self.error
                 self.given_ttvs
                 self.computed_ttvs
-                
+
                 #### rv data:
                 self.rvbjd
                 self.rvmnvel
                 self.rverrvel
                 self.orbital_elements
-                
+
             ________________________________________________________
             ____Input_Measurements____
             ________________________________________________________
             TTV_Module.Input_Measurements: module
-            
+
             .mearth:
                 mass of the earth
             .msun:
@@ -81,13 +84,13 @@ def describe():
                 (list) [mstar, epoch, measured, error, orbital_elements]
             .rv:
                 (list) [[rvbjd], [mnvel], [errvel]]
-                
+
             ________________________________________________________
             ____planetary_system____
             ________________________________________________________
-            
+
             TTV_Module.planetary_system.planetary_system: class
-            
+
             FUNCTIONS:
                 .__init__(self, nplanets, orbital_elements, theta=None)
                     RETURNS:
@@ -108,40 +111,40 @@ def describe():
                         self.non_gaus_max
                         self.non_gaus_min
                         self.theta_ranges
-                    
+
                 .initial_state(self, nwalkers)
                     RETURNS:
                         initial_state i.e. p0
-                
+
                 .describe(self):
                     Prints a description of the planetary system
-            
+
             ________________________________________________________
             ____prob_functions____
             ________________________________________________________
-            
+
             TTV_Module.prob_functions.prob_functions: class
-            
+
             FUNCTIONS:
                 .compute_oc(obs, epoch):
                     computes the O-C
-                    
+
                 .lnprob(theta, x)
                     RETURNS:
                         lnprior+lnlike
-                
+
                     .lnprior(theta, x):
                         RETURNS lnprior
-                        
+
                     .lnlike(theta, x):
                         RETURNS likelihood
-            
+
             ________________________________________________________
             ____mcmc_run____
             ________________________________________________________
-            
+
             TTV_Module.prob_functions.prob_functions: class
-            
+
             FUNCTIONS:
                 .__init__(self, planetary_system, given, prob_functions):
                     RETURNS:
@@ -152,7 +155,7 @@ def describe():
                         self.prob_functions
                         self.x = given, planetary_system
                         self.EnsembleSampler
-                    
+
                 .explore(self, niter, thin_by=1, moves = [(emcee.moves.DEMove(), 0.8), (emcee.moves.DESnookerMove(), 0.2)], verbose=True, tune=True)
                     PARAMETERS:
                         niter: iterations
@@ -160,7 +163,7 @@ def describe():
                         moves: types of moves made in emcee
                         verbose: boolean of verbose computation
                         tune: adjusts guesses as it learns
-                        
+
                     RETURNS:
                         self.moves
                         self.discard
@@ -170,93 +173,93 @@ def describe():
                         self.state
                         self.samples
                         self.theta_max
-                
+
                 .plot_ttvs(self, theta=None):
                     PARAMETERS:
                         theta, optional, will plot TTVS given any orbital elements
                     RETURNS:
                         plot of each planet's TTVs
-                        
+
                 .plot_corner(self, theta=None)
                     RETURNS:
                         corner plot of the run
-                        
+
                 .plot_chains(self):
                     RETURNS:
                         plot of chains
-                        
+
                 .summarize(self):
                     RETURNS:
                         summary of run, results, and other relevant info. Also saves to file
-                
+
                 .autocorr(self):
                     RETURNS:
                         estimated Tau
-                        
+
                 pickle(self):
                     RETURNS:
                         saves pkl object to output_path
-                        
+
                 plot_rvs(self, theta=None):
                     RETURNS:
                         RV plot
-                        
+
             ________________________________________________________
             ____utilities____
             ________________________________________________________
-            
+
             TTV_Module.utilities: module
-            
+
             .mearth
             .msun
             .au_per_day [meters/second]
             .mstar
-            
+
             FUNCTIONS:
                 .best_fit(X, Y):
                     RETURNS:
                         slope, intercept
-                    
+
                 .compute_oc(obs, epoch):
                     RETURNS:
                         Observed-Computed
-                
+
                 .ttvs(measured, epoch):
                     RETURNS:
                         computed ttvs
-                        
+
                 .trim(x, model, epo, flatten=True):
                     RETURNS:
                         mod, meas, tt, err, ep (all trimmed to length and epoch)
-                        
+
                 .flatten_list(_2d_list):
                     RETURNS:
                         flat_list
-                        
+
                 .generate_planets(theta, x):
                     RETURNS:
                         list of planet objects for ttvfast
-                
+
                 .model_transits(theta, x):
                     RETURNS:
                         [modelled transits], [epochs]
-                        
+
                 .model_rvs(theta, x):
                     RETURNS:
                         RVs [m/s] on given BJDs
-                        
+
                 .plot_rvs(self, theta=None):
                     RETURNS:
                         RV plot
-                        
+
                 .sampler_to_theta_max(sampler):
                     RETURNS:
                         theta_max
-                        
+
                 .restore(mcmc_run, filename=None)
                     RETURNS:
                         pickled run
-                
+
                 .plot_periodogram(rv, title):
                     RETURNS:
                         periodogram
