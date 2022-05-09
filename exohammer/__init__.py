@@ -14,7 +14,7 @@ from . import mcmc_run
 from . import system
 try:
 	from . import store
-except ImportError or ModuleNotFoundError as err:
+except ModuleNotFoundError as err:
 	print('Could not import exohammer.store, {}\nstore feature will not be usable.'.format(err))
 
 
