@@ -25,7 +25,7 @@ setup(
 	license='GPL',
 	packages=['exohammer', 'exohammer.lnprob', 'exohammer.model'],
 	install_requires=['numpy', 'ttvfast', 'emcee', 'astropy'],
-	EXTRA_REQUIRE={
+	extras_require={
 		"extras": ["pickle", "matplotlib", "easygui"], },
 	# "tests": ["pytest", "pytest-cov", "coverage[toml]"],
 	# ext_modules = [exohammer, ], # <== Exohammer does not yet define any extensions
