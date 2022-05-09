@@ -28,7 +28,7 @@ setup(
 	EXTRA_REQUIRE={
 		"extras": ["pickle", "matplotlib", "easygui"], },
 	# "tests": ["pytest", "pytest-cov", "coverage[toml]"],
-	ext_modules = [exohammer, ],
+	# ext_modules = [exohammer, ], # <== Exohammer does not yet define any extensions
 	classifiers = [
 	'Development Status :: 4 - Beta',
 	'Intended Audience :: Science/Research',
